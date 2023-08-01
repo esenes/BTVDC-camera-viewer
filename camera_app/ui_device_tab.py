@@ -7,6 +7,7 @@ class Ui_device_tab(QtWidgets.QWidget):
 
     new_img_signal = pyqtSignal()
     new_plot_param_signal = pyqtSignal()
+    camera_start_signal = pyqtSignal()
 
     def __init__(self, parent=None):
         super(Ui_device_tab, self).__init__(parent)
@@ -64,6 +65,7 @@ class Ui_device_tab(QtWidgets.QWidget):
                 self.japc.startSubscriptions()
                 print(f'Connected to {self.current_cam_name}')
                 # message to the message box 
+                self.camera_start_signal.emit()
             except:
                 print(f'Failed to connect to {self.current_cam_name}')
                 # message to the message box 

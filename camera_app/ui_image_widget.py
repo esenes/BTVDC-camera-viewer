@@ -29,6 +29,7 @@ class Canvas(FigureCanvas):
         FigureCanvas.updateGeometry(self)
 
     def plot_function(self, data):
+        self.pix_max = np.max(data)
         if self.plot_params['cauto']:
             self.img = self.ax.imshow(data, cmap=self.plot_params['cmap'])
         else:
@@ -41,7 +42,9 @@ class Canvas(FigureCanvas):
 
     def refresh_plot_param(self, data):
         self.plot_params = data
-        if not(self.plot_params['cauto']): 
+        if self.plot_params['cauto']:
+            self.cbar.mappable.set_clim(vmin=0, vmax=self.pix_max)
+        else:
             self.cbar.mappable.set_clim(vmin=self.plot_params['cmin'], vmax=self.plot_params['cmax'])
 
 class Ui_image_widget(QWidget):

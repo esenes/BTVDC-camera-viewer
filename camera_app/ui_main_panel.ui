@@ -46,6 +46,11 @@
       <string>Process</string>
      </attribute>
     </widget>
+    <widget class="Ui_calibration_tab" name="tab3">
+     <attribute name="title">
+      <string>Calibration</string>
+     </attribute>
+    </widget>
    </widget>
    <widget class="QLabel" name="messageBox">
     <property name="geometry">
@@ -89,6 +94,12 @@
    <class>Ui_device_tab</class>
    <extends>QWidget</extends>
    <header>ui_device_tab</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Ui_calibration_tab</class>
+   <extends>QWidget</extends>
+   <header>ui_calibration_tab</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
