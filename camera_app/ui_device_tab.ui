@@ -256,9 +256,9 @@
    <widget class="QLineEdit" name="exposure_lineEdit">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>180</x>
       <y>10</y>
-      <width>171</width>
+      <width>91</width>
       <height>29</height>
      </rect>
     </property>
@@ -269,9 +269,9 @@
    <widget class="QLineEdit" name="gain_lineEdit">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>180</x>
       <y>50</y>
-      <width>171</width>
+      <width>91</width>
       <height>29</height>
      </rect>
     </property>
@@ -282,9 +282,57 @@
    <widget class="QLineEdit" name="delay_lineEdit">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>180</x>
       <y>90</y>
-      <width>171</width>
+      <width>91</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="acqDelay_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>90</y>
+      <width>71</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="acqGain_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>50</y>
+      <width>71</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="acqExposure_lineEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>10</y>
+      <width>71</width>
       <height>29</height>
      </rect>
     </property>

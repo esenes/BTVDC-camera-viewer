@@ -57,7 +57,7 @@
      <rect>
       <x>30</x>
       <y>610</y>
-      <width>391</width>
+      <width>951</width>
       <height>20</height>
      </rect>
     </property>
@@ -67,7 +67,7 @@
      </font>
     </property>
     <property name="text">
-     <string> </string>
+     <string/>
     </property>
    </widget>
   </widget>

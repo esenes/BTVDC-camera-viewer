@@ -5,9 +5,9 @@ from PyQt5.QtCore import pyqtSignal
 
 class Ui_device_tab(QtWidgets.QWidget):
 
-    new_img_signal = pyqtSignal()
     new_plot_param_signal = pyqtSignal()
-    camera_start_signal = pyqtSignal()
+    camera_connect_signal = pyqtSignal()
+    camera_disconnect_signal = pyqtSignal()
 
     def __init__(self, parent=None):
         super(Ui_device_tab, self).__init__(parent)
@@ -22,6 +22,9 @@ class Ui_device_tab(QtWidgets.QWidget):
         self.japc = None
         self.current_cam_name = None
         self.camList = None
+
+        # broadcasterd params
+        self.acqParameters = None
 
         # data to pass when emitting signals
         self.imageData = None
@@ -45,8 +48,10 @@ class Ui_device_tab(QtWidgets.QWidget):
         ## autoscale
         self.colormap_auto_checkBox.stateChanged.connect( self.action_set_cautoscale )
         ## cmin
+        # self.colormap_min.setText( str(self.plot_parameters['cmin']) )
         self.colormap_min.editingFinished.connect( self.action_change_cmin )
         ## max
+        # self.colormap_max.setText( str(self.plot_parameters['cmax']) )
         self.colormap_max.editingFinished.connect( self.action_change_cmax )
 
         # manage scale
@@ -60,23 +65,24 @@ class Ui_device_tab(QtWidgets.QWidget):
         if self.startButton.isChecked():
             self.startButton.setText('STOP')
             self.startButton.setStyleSheet("background-color:#ff9999")
-            try:
-                self.japc.subscribeParam(self.current_cam_name+'/LastImage#image2D', onValueReceived=self.new_img_callback, getHeader=True, unixtime=True)
-                self.japc.startSubscriptions()
-                print(f'Connected to {self.current_cam_name}')
-                # message to the message box 
-                self.camera_start_signal.emit()
-            except:
-                print(f'Failed to connect to {self.current_cam_name}')
-                # message to the message box 
-
+            self.camera_connect_signal.emit()
         else:
             self.startButton.setText('START')
             self.startButton.setStyleSheet("background-color:#63f29a")
-            self.japc.stopSubscriptions()
-            self.japc.clearSubscriptions()
-            print(f'Closed connection to {self.current_cam_name}')
-            # message to the message box 
+            self.camera_disconnect_signal.emit()
+
+    ##### NEW DATA AVAILABLE
+    def refresh_params(self, new_params):
+        self.acqParameters = new_params
+        # panel refresh
+        self.acqExposure_lineEdit.setText( str(self.acqParameters['acqCameraExposureTimeUs']) )
+        self.acqGain_lineEdit.setText( str(self.acqParameters['acqCameraGain']) )
+        self.acqDelay_lineEdit.setText( str(self.acqParameters['acqCameraTriggerDelay']) )
+
+    def refresh_status(self):
+        print('new status tab1')
+        pass       
+
 
     ##### USER ACTIONS ON THE PANEL
     def action_select_cam(self):
@@ -126,7 +132,3 @@ class Ui_device_tab(QtWidgets.QWidget):
             self.plot_parameters['cauto'] = False
         self.new_plot_param_signal.emit()
 
-    #### ACTIONS ON RECEIVING IMAGES    
-    def new_img_callback(self, paramName, value, headerInfo):
-        self.imageData = value
-        self.new_img_signal.emit()

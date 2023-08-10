@@ -28,25 +28,3 @@ class Ui_calibration_tab(QtWidgets.QWidget):
         ## japc
         self.japc = japc
 
-    def camera_start(self, cam_name):
-        self.current_cam_name = cam_name
-
-        self.japc.subscribeParam(self.current_cam_name+'/AcquisitionStatus', onValueReceived=self.acqStatusCallback, getHeader=True, unixtime=True)
-        self.japc.subscribeParam(self.current_cam_name+'/AcquiredParameters', onValueReceived=self.acqParamCallback, getHeader=True, unixtime=True)
-        self.japc.subscribeParam(self.current_cam_name+'/ExpertSetting', onValueReceived=self.expSettingCallback, getHeader=True, unixtime=True)
-        self.japc.startSubscriptions()
-
-    def acqStatusCallback(self, paramName, value, headerInfo):
-        # self.imageData = value
-        # self.new_img_signal.emit()
-        print('New AcqStatus')
-
-    def acqParamCallback(self, paramName, value, headerInfo):
-        # self.imageData = value
-        # self.new_img_signal.emit()
-        print('New AcqParam')
-
-    def expSettingCallback(self, paramName, value, headerInfo):
-        # self.imageData = value
-        # self.new_img_signal.emit()
-        print('New expSetting')
